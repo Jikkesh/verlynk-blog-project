@@ -1,0 +1,92 @@
+<div class="btn-box">
+    <button (click)="handleAdd()" type="button"
+        class="text-white bg-black hover:bg-gray-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Create
+        Blog</button>
+</div>
+
+<div class='flex space-x-2 justify-center items-center bg-white h-screen dark:invert' *ngIf="!isBlogData">
+    <span class='sr-only'>Loading...</span>
+    <div class='h-8 w-8 bg-black rounded-full animate-bounce [animation-delay:-0.3s]'></div>
+    <div class='h-8 w-8 bg-black rounded-full animate-bounce [animation-delay:-0.15s]'></div>
+    <div class='h-8 w-8 bg-black rounded-full animate-bounce'></div>
+</div>
+
+<div *ngIf="isBlogData">
+    <div class="blog-box max-w-screen-lg mx-auto p-5 sm:p-5 md:p-16" *ngFor="let blog of blogData">
+        <div class="mb-10 rounded overflow-hidden flex flex-col mx-auto">
+            <p
+                class="text-xl sm:text-4xl font-semibold hover:text-indigo-600 transition duration-500 ease-in-out inline-block mb-2">
+                {{blog.title}}</p>
+            <div class="relative">
+                <a href="#">
+                    <img class="w-full h-64" src="../../../assets/background-image.jpg" alt="Sunset in the mountains">
+                </a>
+
+            </div>
+            <p class="text-gray-700 py-5 text-base leading-8">
+                {{blog.description}}
+            </p>
+            <div class="blog-link-box">
+                <a (click)="handleDelete(blog._id)">Delete</a>
+                <a (click)="handleUpdate(blog._id)">Update</a>
+            </div>
+            <div class="py-5 text-sm font-regular text-gray-900 flex">
+
+                <a href="#" class="flex flex-row items-center hover:text-indigo-600">
+                    <svg class="text-indigo-600" fill="currentColor" height="16px" aria-hidden="true" role="img"
+                        focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path fill="currentColor"
+                            d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z">
+                        </path>
+                        <path d="M0 0h24v24H0z" fill="none"></path>
+                    </svg>
+                    <span class="ml-1">{{blog.postedBy}}</span></a>
+            </div>
+
+            <hr>
+
+            <div class="bg-gray-100 p-6">
+                <h2 class="text-lg font-bold mb-4">Comments</h2>
+                <div class="flex flex-col space-y-4">
+                    <div class="bg-white p-4 rounded-lg shadow-md" *ngFor="let comment of blog.comments; let i = index">
+                        <h3 class="text-lg font-bold">{{comment.commentedBy}}</h3>
+                        <p class="text-gray-700">{{comment.text}}
+                        </p>
+                        <div class="comment-link-box">
+                            <a (click)="handleCommentDelete(blog._id,i)">Delete</a>
+                        </div>
+                    </div>
+
+                    <form class="bg-white p-4 rounded-lg shadow-md">
+                        <h3 class="text-lg font-bold mb-2">Add a comment</h3>
+                        <div class="mb-4">
+                            <input [(ngModel)]="newComment" name="newComment"
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                id="newComment" type="text" placeholder="Enter you comment">
+                        </div>
+                        <button (click)="handleAddComment(blog._id)"
+                            class="bg-cyan-500 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                            type="submit">
+                            Submit
+                        </button>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="flex justify-center">
+        <a (click)="hanldePrevious()" [class.disabled]="isFirstPage()"
+            class="flex items-center justify-center px-3 h-8 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+            Previous
+        </a>
+
+        <a (click)="handleNext()" [class.disabled]="isLastPage()"
+            class="flex items-center justify-center px-3 h-8 ms-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+            Next
+        </a>
+    </div>
+
+</div>
