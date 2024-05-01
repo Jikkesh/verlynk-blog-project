@@ -10,6 +10,15 @@ The Verlynk Blog Project is a simple blog platform where users can create blog p
 - Rate limiting for API requests
 - API documentation with Swagger UI
 
+## Technologies Used
+
+- Angular
+- Node.js
+- Express
+- MongoDB
+- JWT for authentication
+- Swagger for API documentation
+- Tailwind CSS for styling
 
 ## Installation Instructions
 
@@ -46,13 +55,10 @@ Once both the client and server applications are running with DB connected, you 
 
 ## API Documentation
 
+The API endpoints are documented using Swagger UI. You can access the API documentation at http://localhost:5000/api-docs after starting the server.
 
-## Technologies Used
+To get al information about
 
-- Angular
-- Node.js
-- Express
-- MongoDB
-- JWT for authentication
-- Swagger for API documentation
-- Tailwind CSS for styling
+- Params and query you need to have.
+- Error handling. 
+

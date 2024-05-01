@@ -20,31 +20,33 @@ export class AddBlogComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
     this.addForm = this.formBuilder.group({
       title: "",
       description: "",
       postedBy: "",
       comments: []
     });
+
   }
 
-  getUserName() {
+  getUserName(): any {
     const token = localStorage.getItem("USER_TOKEN");
-    const decoded :any = jwt_decode.jwtDecode(token);
+    const decoded: any = jwt_decode.jwtDecode(token);
     if (decoded) {
       console.log(decoded)
       return decoded;
     }
     else {
-      return null
+      return null;
     }
   }
 
-  onSubmit() {
-  
-    const info  = this.getUserName();
-    if(info){
-      var {name} = info;
+  onSubmit(): void {
+
+    const info = this.getUserName();
+    if (info) {
+      var { name } = info;
     }
     this.addForm.value.postedBy = name;
 
@@ -52,17 +54,13 @@ export class AddBlogComponent implements OnInit {
     this.blogService.addBlog(body).subscribe((result) => {
 
       if (result.status == 200) {
-        console.log(result),
-          this.addForm.reset(),
+        this.addForm.reset(),
           this.router.navigate(["/"])
       }
       else {
         alert("Something went wrong on server")
       }
-
     })
-
-
 
   }
 
