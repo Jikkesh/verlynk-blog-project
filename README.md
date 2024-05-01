@@ -26,7 +26,7 @@ To run the project locally, follow these steps:
 
 1. **Clone the project from GitHub:**
 
-git clone https://github.com/yourusername/verlynk-blog-project.git
+git clone https://github.com/Jikkesh/verlynk-blog-project.git
 
 2. **Navigate to the project directory:**
 cd verlynk-blog-project
