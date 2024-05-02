@@ -45,8 +45,12 @@ To run the project locally, follow these steps:
 # MongoDB configuration
 MONGODB_URL = <your_mongoDB_URL>
 
+(I have added my test MongoDB URL in .env.example, can use that too.)
+
 # JWT secret key
 JWT_SECRET_KEY = <your_secret_key>
+
+(Add any key word for encryption)
 
 5. Start the client-side (Angular) application:
 
