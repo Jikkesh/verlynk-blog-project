@@ -43,10 +43,10 @@ To run the project locally, follow these steps:
 - Fill in the MongoDB connection URL, PORT number and JWT_SECRET_KEY for Authentication.
 
 # MongoDB configuration
-MONGODB_URI=mongodb://<username>:<password>@<host>:<port>/<database>
+MONGODB_URL = <your_mongoDB_URL>
 
 # JWT secret key
-JWT_SECRET=<your_secret_key>
+JWT_SECRET_KEY = <your_secret_key>
 
 5. Start the client-side (Angular) application:
 
