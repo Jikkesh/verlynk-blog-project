@@ -41,7 +41,7 @@ app.get("/", (req, res) => {
 app.use("/auth",limiter, authRouter);
 app.use("/data",limiter, dataRouter);
 
-const CONNECT_URL = process.env.CONNECT_URL;
+const CONNECT_URL = process.env.MONGODB_URL;
 const PORT = process.env.PORT || 5000;
 
 mongoose.connect(CONNECT_URL, { useNewUrlParser: true, useUnifiedTopology: true })

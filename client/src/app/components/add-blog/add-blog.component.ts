@@ -46,6 +46,8 @@ export class AddBlogComponent implements OnInit {
   onSubmit(): void {
     const info = this.getTokenDecode();
 
+    console.log("working")
+
     if (info) {
       var { name } = info;
     }

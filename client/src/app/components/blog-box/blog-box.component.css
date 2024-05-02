@@ -45,3 +45,7 @@ a.disabled {
     pointer-events: none; /* Disable pointer events */
     opacity: 0.6;
 }
+
+.loading{
+    height: 64.45vh;
+}

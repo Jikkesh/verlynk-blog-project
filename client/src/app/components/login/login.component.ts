@@ -61,7 +61,6 @@ export class LoginComponent implements OnInit {
 
     this.authService.onLogin(body).subscribe((result) => {
       if (result.status == 200) {
-        console.log(result),
           localStorage.setItem("USER_TOKEN", result.token),
           this.authService.onUserLogin(true),
           this.router.navigate(["/"])

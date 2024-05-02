@@ -4,11 +4,15 @@
         Blog</button>
 </div>
 
-<div class='flex space-x-2 justify-center items-center bg-white h-screen dark:invert' *ngIf="!isBlogData">
+<div class='flex space-x-2 justify-center items-center bg-white h-screen dark:invert loading' *ngIf="!isBlogData">
     <span class='sr-only'>Loading...</span>
     <div class='h-8 w-8 bg-black rounded-full animate-bounce [animation-delay:-0.3s]'></div>
     <div class='h-8 w-8 bg-black rounded-full animate-bounce [animation-delay:-0.15s]'></div>
     <div class='h-8 w-8 bg-black rounded-full animate-bounce'></div>
+</div>
+
+<div *ngIf = "totalBlog == 0" class="flex justify-center align-middle loading"  >
+    Hey, It's Empty. Create some blog to the List.
 </div>
 
 <div *ngIf="isBlogData">

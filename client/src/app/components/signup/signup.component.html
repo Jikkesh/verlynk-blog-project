@@ -10,31 +10,41 @@
             <input
                 class="mb-4 p-2 appearance-none block w-full bg-gray-200 placeholder-gray-900 rounded border focus:border-teal-500"
                 type="text" placeholder="Name" formControlName="name" />
-            <div *ngIf="signupData.get('name').hasError('required') && isFormError" class="text-red-600 ms-3 font-medium">
+            <div *ngIf="signupData.get('name').hasError('required') && isFormError"
+                class="text-red-600 ms-3 font-medium">
                 *Name is required.
             </div>
             <input
                 class="mb-4 p-2 appearance-none block w-full bg-gray-200 placeholder-gray-900 rounded border focus:border-teal-500"
                 type="email" placeholder="Email" formControlName="email" />
 
-            <div *ngIf="signupData.get('email').hasError('required') && isFormError" class="text-red-600 ms-3 font-medium ">
+            <div *ngIf="signupData.get('email').hasError('required') && isFormError"
+                class="text-red-600 ms-3 font-medium ">
                 *Email is required.
             </div>
-            <div *ngIf="signupData.get('email').hasError('email') && isFormError " class="text-red-600 ms-3 font-medium">
+            <div *ngIf="signupData.get('email').hasError('email') && isFormError "
+                class="text-red-600 ms-3 font-medium">
                 *Enter a Valid Email.
             </div>
 
             <input
                 class="mb-4 p-2 appearance-none block w-full bg-gray-200 placeholder-gray-900 rounded border focus:border-teal-500"
                 type="password" placeholder="Password" formControlName="password" />
-            <div *ngIf="signupData.get('password').hasError('required') && isFormError" class="text-red-600 ms-3 font-medium">
+            <div *ngIf="signupData.get('password').hasError('required') && isFormError"
+                class="text-red-600 ms-3 font-medium">
                 *Password is required.
             </div>
+            <div *ngIf="signupData.get('password').hasError('minlength') && isFormError"
+                class="text-red-500 ms-3 font-medium">
+                Password must be at least 8 characters long.
+            </div>
+
 
             <input
                 class="mb-4 p-2 appearance-none block w-full bg-gray-200 placeholder-gray-900 rounded border focus:border-teal-500"
                 type="password" placeholder="Confirm Password" formControlName="confirmPassword" />
-            <div *ngIf="signupData.get('confirmPassword').hasError('required') && isFormError" class="text-red-600 ms-3 font-medium">
+            <div *ngIf="signupData.get('confirmPassword').hasError('required') && isFormError"
+                class="text-red-600 ms-3 font-medium">
                 *Confirm Password again.
             </div>
 

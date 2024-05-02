@@ -19,7 +19,7 @@ export class BlogBoxComponent implements OnInit {
   private start: number = 0;
   private limit: number = 5;
 
-  private totalBlog: number;
+   totalBlog: number;
 
   constructor(private blogService: BlogService,
     private router: Router
@@ -29,6 +29,7 @@ export class BlogBoxComponent implements OnInit {
 
     this.blogService.getBlogCount().subscribe((result) => {
       this.totalBlog = result.data
+      console.log(this.totalBlog)
     }, (error) => {
       console.error(error.message);
     });
@@ -122,13 +123,10 @@ export class BlogBoxComponent implements OnInit {
               text: body.text,
               commentedBy: body.userName
             });
+            this.newComment = "";
           }
         })
-      }
-      else {
-        alert(`${result.message}`)
-      }
-    });
+      }});
   }
 
 
