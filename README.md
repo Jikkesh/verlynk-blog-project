@@ -34,6 +34,12 @@ To run the project locally, follow these steps:
 
 3.Install dependencies for both the client and server:
 
+cd client
+**npm install**
+
+cd..
+
+cd server
 **npm install**
 
 4. **Set up environment variables:**
