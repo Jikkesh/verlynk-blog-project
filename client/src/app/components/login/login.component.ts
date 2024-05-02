@@ -13,6 +13,11 @@ export class LoginComponent implements OnInit {
 
   loginData: FormGroup;
 
+  isFormError: boolean = false;
+
+  isCredMatch: boolean = true;
+
+
   constructor(private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router
@@ -20,30 +25,57 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginData = this.formBuilder.group({
-      email: "",
-      password: ""
+      email: [null, [Validators.required, Validators.email]],
+      password: [null, [Validators.required]]
     });
   }
 
+  credMatchClose(): void {
+    this.isCredMatch = true;
+  }
+
+  hideErrorAfterDelay(): void {
+    setTimeout(() => {
+      this.isFormError = false;
+    }, 5000);
+  }
 
 
+  onSubmit(): void {
+    if (this.loginData.invalid) {
+      this.isFormError = true;
+      this.hideErrorAfterDelay();
+      return;
+    }
 
-  onSubmit() {
+    const { email, password } = this.loginData.value;
+
+    if (email == null || password == null) {
+      return;
+    }
+
+    if (this.loginData.get('email').hasError('email')) {
+      return;
+    }
     const body: User = this.loginData.value;
 
     this.authService.onLogin(body).subscribe((result) => {
       if (result.status == 200) {
-          console.log(result),
-          localStorage.setItem("USER_TOKEN",result.token),
+        console.log(result),
+          localStorage.setItem("USER_TOKEN", result.token),
           this.authService.onUserLogin(true),
           this.router.navigate(["/"])
       }
-      else if(result.status == 400){
-          alert("Password is Incorrect")
+    }, (error) => {
+      if (error.status == 400) {
+        this.isCredMatch = false;
+        this.loginData.reset();
       }
-      else{
-        alert("User not found, Please Signup !")
+      else {
+        alert("User not found, Please create new account !");
+        this.router.navigate(["signup"])
       }
+
     });
   }
 

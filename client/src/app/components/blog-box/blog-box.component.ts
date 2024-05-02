@@ -16,10 +16,10 @@ export class BlogBoxComponent implements OnInit {
 
   newComment: string;
 
-  private start : number = 0;
-  private end : number = 5;
+  private start: number = 0;
+  private limit: number = 5;
 
-  private totalBlog : number;
+  private totalBlog: number;
 
   constructor(private blogService: BlogService,
     private router: Router
@@ -27,64 +27,73 @@ export class BlogBoxComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.blogService.getBlogCount().subscribe((result) => this.totalBlog = result.data )
+    this.blogService.getBlogCount().subscribe((result) => {
+      this.totalBlog = result.data
+    }, (error) => {
+      console.error(error.message);
+    });
 
     const start = this.start;
-    const end = this.end;
+    const end = this.limit;
+
     this.blogService.getBlogs(start, end).subscribe(
       (result) => {
-        console.log(result)
         this.blogData = result.data
         this.isBlogData = true;
+      }, (error) => {
+        console.error(error.message);
       });
 
   }
 
-  getUserName() {
+  getTokenDecode(): any {
     const token = localStorage.getItem("USER_TOKEN");
     const decoded: any = jwt_decode.jwtDecode(token);
     if (decoded) {
-      console.log(decoded)
-      return decoded;
+      return  decoded ;
     }
     else {
       return null
     }
   }
 
-
-  handleAdd() {
+  handleAdd(): void {
     if (!localStorage.getItem("USER_TOKEN")) {
       alert("Login to access Blog")
       return;
+    } else {
+      this.router.navigate(["add-blog"]);
     }
-    this.router.navigate(["add-blog"]);
+
   }
 
 
-  handleDelete(id: string) {
+  handleDelete(id: string): void {
     if (!localStorage.getItem("USER_TOKEN")) {
       alert("Login to access Blog")
       return;
     }
     var updatedBlog: Blog[];
     this.blogService.deleteBlog(id).subscribe((result) => {
+
       if (result.status == 200) {
-        console.log(result.message),
-          updatedBlog = this.blogData.filter((blog) => blog._id !== id),
+        this.totalBlog--;
+        updatedBlog = this.blogData.filter((blog) => blog._id !== id),
           this.blogData = updatedBlog;
       }
-      else if (404) {
-        alert(result.message)
+    }, (error) => {
+      if (error.status = 404) {
+        alert(error.message)
       }
       else {
-        console.log(result.message)
+        alert(error.message)
       }
+
     });
   }
 
 
-  handleUpdate(id) {
+  handleUpdate(id: string): void {
     if (!localStorage.getItem("USER_TOKEN")) {
       alert("Login to access Blog")
       return;
@@ -99,7 +108,7 @@ export class BlogBoxComponent implements OnInit {
       return;
     }
 
-    const info = this.getUserName();
+    const info = this.getTokenDecode();
     if (info) {
       var { name } = info;
     }
@@ -123,7 +132,7 @@ export class BlogBoxComponent implements OnInit {
   }
 
 
-  handleCommentDelete(blog_id, comment_id) {
+  handleCommentDelete(blog_id, comment_id): void {
 
     if (!localStorage.getItem("USER_TOKEN")) {
       alert("Login to access Blog")
@@ -138,58 +147,61 @@ export class BlogBoxComponent implements OnInit {
           }
         });
       }
-      else {
-        console.log(result.message)
-      }
-    })
+    }, (error) => {
+      console.error(error.message);
+      alert("Something went wrong on server, Try again later");
+    });
+
   }
 
-  isFirstPage(){
-    if(this.start <= 0){
-      return true;
-   }
-   else{
-    return false;
-   }
-  }
 
-  isLastPage(){
-    if(this.start >= this.totalBlog - 5){
+  //Pagination
+
+  isFirstPage(): boolean {
+    if (this.start <= 0) {
       return true;
     }
-    else{
+    else {
       return false;
     }
   }
 
+  isLastPage(): boolean {
+    if (this.start >= this.totalBlog - 5) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
 
-  hanldePrevious() {
+  hanldePrevious(): void {
 
-    if(this.start <= 0){
-       alert("Previous end reached");
-       return;
+    if (this.start <= 0) {
+      alert("Previous end reached");
+      return;
     }
 
-    this.start = this.start - this.end;
+    this.start = this.start - this.limit;
     this.isBlogData = false;
-    this.blogService.getBlogs(this.start,this.end).subscribe(
+    this.blogService.getBlogs(this.start, this.limit).subscribe(
       (result) => {
         console.log(result)
         this.blogData = result.data
         this.isBlogData = true;
       });
- 
+
   }
 
-  handleNext() {
-    if(this.start >= this.totalBlog - 5){
+  handleNext(): void {
+    if (this.start >= this.totalBlog - 5) {
       alert("Total Blog reached");
       return;
     }
-    
-    this.start = this.start + this.end;
+
+    this.start = this.start + this.limit;
     this.isBlogData = false;
-    this.blogService.getBlogs(this.start,this.end).subscribe(
+    this.blogService.getBlogs(this.start, this.limit).subscribe(
       (result) => {
         console.log(result)
         this.blogData = result.data

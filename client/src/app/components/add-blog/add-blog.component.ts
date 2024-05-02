@@ -19,18 +19,19 @@ export class AddBlogComponent implements OnInit {
     private router: Router
   ) { }
 
-  ngOnInit() {
-
+  ngOnInit() : void {
     this.addForm = this.formBuilder.group({
-      title: "",
-      description: "",
-      postedBy: "",
-      comments: []
+      title: null,
+      description: null,
+      postedBy: null
     });
-
   }
 
-  getUserName(): any {
+  handleBack(): void {
+    this.router.navigate([""]);
+  }
+
+  getTokenDecode(): any {
     const token = localStorage.getItem("USER_TOKEN");
     const decoded: any = jwt_decode.jwtDecode(token);
     if (decoded) {
@@ -43,8 +44,8 @@ export class AddBlogComponent implements OnInit {
   }
 
   onSubmit(): void {
+    const info = this.getTokenDecode();
 
-    const info = this.getUserName();
     if (info) {
       var { name } = info;
     }
@@ -57,9 +58,11 @@ export class AddBlogComponent implements OnInit {
         this.addForm.reset(),
           this.router.navigate(["/"])
       }
-      else {
-        alert("Something went wrong on server")
-      }
+
+    }, (error) => {
+      alert("Something went wrong on server, Try again later");
+      console.error(error.message);
+      this.router.navigate([""]);
     })
 
   }

@@ -2,22 +2,49 @@
     <div class="w-10/12 sm:w-8/12 md:w-6/12 lg:w-5/12 xl:w-4/12 mb-4">
         <h1 class="text-4xl font-semibold">Signup to become a User...</h1>
     </div>
+
+
+
     <div class="w-10/12 sm:w-8/12 md:w-6/12 lg:w-5/12 xl:w-4/12 mb-6">
-        <form [formGroup]="signupData" (ngSubmit) =" onSubmit()">
+        <form [formGroup]="signupData" (ngSubmit)=" onSubmit()">
             <input
                 class="mb-4 p-2 appearance-none block w-full bg-gray-200 placeholder-gray-900 rounded border focus:border-teal-500"
                 type="text" placeholder="Name" formControlName="name" />
+            <div *ngIf="signupData.get('name').hasError('required') && isFormError" class="text-red-600 ms-3 font-medium">
+                *Name is required.
+            </div>
             <input
                 class="mb-4 p-2 appearance-none block w-full bg-gray-200 placeholder-gray-900 rounded border focus:border-teal-500"
                 type="email" placeholder="Email" formControlName="email" />
+
+            <div *ngIf="signupData.get('email').hasError('required') && isFormError" class="text-red-600 ms-3 font-medium ">
+                *Email is required.
+            </div>
+            <div *ngIf="signupData.get('email').hasError('email') && isFormError " class="text-red-600 ms-3 font-medium">
+                *Enter a Valid Email.
+            </div>
+
             <input
                 class="mb-4 p-2 appearance-none block w-full bg-gray-200 placeholder-gray-900 rounded border focus:border-teal-500"
-                type="password" placeholder="Password" formControlName="password"  />
-                <input
+                type="password" placeholder="Password" formControlName="password" />
+            <div *ngIf="signupData.get('password').hasError('required') && isFormError" class="text-red-600 ms-3 font-medium">
+                *Password is required.
+            </div>
+
+            <input
                 class="mb-4 p-2 appearance-none block w-full bg-gray-200 placeholder-gray-900 rounded border focus:border-teal-500"
-                type="password" placeholder="Confirm Password" formControlName="confirmPassword"  />
+                type="password" placeholder="Confirm Password" formControlName="confirmPassword" />
+            <div *ngIf="signupData.get('confirmPassword').hasError('required') && isFormError" class="text-red-600 ms-3 font-medium">
+                *Confirm Password again.
+            </div>
+
+            <div *ngIf="!isPasswordMatch" class="text-red-600 ms-3 font-medium">
+                *Password not matching.
+            </div>
+
+
             <div class="flex items-center">
-               Old User?  <a class="underline text-blue-600" routerLink="/login"> Login</a>
+                Old User? <a class="underline text-blue-600" routerLink="/login"> Login</a>
                 <button class="ml-auto w-1/2 bg-gray-800 text-white p-2 rounded font-semibold hover:bg-gray-900"
                     type="submit">Signup</button>
             </div>

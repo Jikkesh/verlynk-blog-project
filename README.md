@@ -24,26 +24,23 @@ The Verlynk Blog Project is a simple blog platform where users can create blog p
 
 To run the project locally, follow these steps:
 
-1. **Clone the project from GitHub:**
+1. Clone the project from GitHub:
 
-git clone https://github.com/yourusername/verlynk-blog-project.git
+**git clone https://github.com/yourusername/verlynk-blog-project.git**
 
-2. **Navigate to the project directory:**
-cd verlynk-blog-project
+2. Navigate to the project directory:
 
-3. **Install dependencies for both the client and server:**
-npm install
+**cd verlynk-blog-project**
 
-4. **Start the client-side (Angular) application:**
-ng serve
+3.Install dependencies for both the client and server:
 
-5. **Start the server-side (Node.js/Express) application:**
-npm start
+**npm install**
 
-6. **Set up environment variables:**
+4. **Set up environment variables:**
+
 - Create a .env file in the server directory.
 - Copy the contents of .env.example into .env.
-- Fill in the MongoDB connection URL, PORT number to run and JWT_SECRET_KEY to Authentication.
+- Fill in the MongoDB connection URL, PORT number and JWT_SECRET_KEY for Authentication.
 
 # MongoDB configuration
 MONGODB_URI=mongodb://<username>:<password>@<host>:<port>/<database>
@@ -51,14 +48,21 @@ MONGODB_URI=mongodb://<username>:<password>@<host>:<port>/<database>
 # JWT secret key
 JWT_SECRET=<your_secret_key>
 
+5. Start the client-side (Angular) application:
+
+**ng serve**
+
+6. Start the server-side (Node.js/Express) application:
+
+**npm start**
+
+
 Once both the client and server applications are running with DB connected, you can access the application in your web browser.
 
 ## API Documentation
 
-The API endpoints are documented using Swagger UI. You can access the API documentation at http://localhost:5000/api-docs after starting the server.
-
-To get al information about
+The API endpoints are documented using Swagger UI. You can access the API documentation at http://localhost:5000/api-docs after starting the server to get all information about API
 
 - Params and query you need to have.
-- Error handling. 
+- Status code your server will send for Error handling. 
 

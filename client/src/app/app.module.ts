@@ -13,6 +13,7 @@ import { LoginComponent } from './components/login/login.component';
 import { AddBlogComponent } from './components/add-blog/add-blog.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { EditBlogComponent } from './components/edit-blog/edit-blog.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,9 @@ import { EditBlogComponent } from './components/edit-blog/edit-blog.component';
     ReactiveFormsModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

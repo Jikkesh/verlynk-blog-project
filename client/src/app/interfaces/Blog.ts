@@ -3,7 +3,7 @@ export interface Blog {
         title: string
         description: string
         postedBy: string
-        comments: {
+        comments?: {
             text: string
             commentedBy: string
           } []

@@ -22,6 +22,7 @@ export class AuthService {
   }
 
   onSignup(body: User): Observable<any> {
+    console.log(body)
     return this.http.post(`${this._url}/signup`, body);
   }
 

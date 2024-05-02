@@ -7,7 +7,6 @@ export const addcom = async (req, res) => {
     try {
         const { blog_id } = req.params;
         const { userName, text } = req.body;
-        console.log("comment adding on" + blog_id + userName, text);
 
         const blog = await blogs.findById(blog_id);
         if (!blog) {
@@ -45,7 +44,6 @@ export const deletecom = async (req, res) => {
 
         blog.comments.splice(comment_id, 1);
         await blog.save();
-        console.log("Data removed Success");
 
         res.status(200).json({ status: 200, message: "Comment deleted successfully", data: blog });
 
